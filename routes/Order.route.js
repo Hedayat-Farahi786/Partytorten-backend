@@ -2,9 +2,9 @@ const express = require("express");
 const Order = require("../models/Order.model");
 const router = express.Router();
 
-router.get("/:customerId", async (req, res) => {
+router.get("/:userId", async (req, res) => {
     try {
-      const orders = await Order.find({ customer: req.params.customerId });
+      const orders = await Order.find({ user: req.params.userId });
       res.json(orders);
     } catch (error) {
       console.error(error);
