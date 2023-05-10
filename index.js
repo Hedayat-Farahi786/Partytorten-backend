@@ -28,6 +28,14 @@ app.get('/', (req, res) => {
     res.send('Hello partytorten :)');
 });
 
+// Signup Route
+SignupRoute = require('./routes/Signup.route.js');
+app.use('/signup', SignupRoute);
+
+// Login Route
+LoginRoute = require('./routes/Login.route.js');
+app.use('/login', LoginRoute);
+
 
 // Category Route
 CategoryRoute = require('./routes/Category.route.js');

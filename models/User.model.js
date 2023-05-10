@@ -19,9 +19,14 @@ const UserSchema = new Schema({
       type: String,
       required: true,
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
+    address: {
+      type: String
+    },
+    phone: {
+      type: String
+    },
+    createdAt: {
+        type: String
     },
     orders: [{
       type: mongoose.Schema.Types.ObjectId,
