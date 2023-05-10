@@ -18,7 +18,10 @@ app.use(cors());
 
 
 // Database Connection
-require('./initDB.js');
+mongoose.connect('mongodb+srv://hedayat_farahi:database.mongo123@cluster0.zmydvyp.mongodb.net/?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 
 app.get('/', (req, res) => {
