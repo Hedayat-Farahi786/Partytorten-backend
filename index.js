@@ -29,9 +29,14 @@ app.get('/', (req, res) => {
 });
 
 
-
+// Category Route
 CategoryRoute = require('./routes/Category.route.js');
 app.use('/category', CategoryRoute);
+
+
+// Product Route
+ProductRoute = require('./routes/Product.route.js');
+app.use('/products', ProductRoute);
 
 
 app.listen(PORT, () => {
