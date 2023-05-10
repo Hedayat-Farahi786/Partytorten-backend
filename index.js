@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 
 
 
-app.get("/", async (req, res) => {
+app.get("/category", async (req, res) => {
     try {
         const categories = await Category.find();
         res.json(categories);
@@ -42,7 +42,7 @@ app.get("/", async (req, res) => {
     }
 });
 
-app.post("/", async (req, res) => {
+app.post("/category", async (req, res) => {
     try {
         const { name } = req.body;
         const category = new Category({ name });
