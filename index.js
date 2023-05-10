@@ -18,6 +18,12 @@ app.use(cors());
 // Database Connection
 require('./initDB.js');
 
+
+app.get('/', (req, res) => {
+    res.send('Hello partytorten :)');
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 })
