@@ -39,6 +39,11 @@ ProductRoute = require('./routes/Product.route.js');
 app.use('/products', ProductRoute);
 
 
+// Order Route
+OrderRoute = require('./routes/Order.route.js');
+app.use('/order', OrderRoute);
+
+
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 })
