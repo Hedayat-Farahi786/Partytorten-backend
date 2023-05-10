@@ -13,7 +13,7 @@ const app = express();
 
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 
@@ -21,43 +21,24 @@ app.use(cors());
 require('./initDB.js');
 
 
-app.get('/', async (req, res) => {
-    
-        const categories = await Category.insertMany([
-          { name: 'Bread' },
-          { name: 'Cake' },
-          { name: 'Pastry' },
-        ]);
-      
-        await Product.insertMany([
-          {
-            name: 'Sourdough Bread',
-            price: 4.99,
-            description: 'A classic sourdough bread with a crunchy crust and a soft interior.',
-            image: 'https://via.placeholder.com/300',
-            category: categories[0]._id,
-          },
-          {
-            name: 'Croissant',
-            price: 2.49,
-            description: 'A flaky and buttery croissant that melts in your mouth.',
-            image: 'https://via.placeholder.com/300',
-            category: categories[2]._id,
-          },
-          {
-            name: 'Chocolate Cake',
-            price: 19.99,
-            description: 'A rich and decadent chocolate cake that is perfect for any occasion.',
-            image: 'https://via.placeholder.com/300',
-            category: categories[1]._id,
-          },
-        ]);
-    
+app.get('/', (req, res) => {
     res.send('Hello partytorten :)');
-
-
 })
 
+// 404 Error handling
+app.use((req, res, next) => {
+    next(createError(404, "Not found"));
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+
+    res.send({
+        status: err.status || 500,
+        message: err.message,
+    });
+});
 
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
