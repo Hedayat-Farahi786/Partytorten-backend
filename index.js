@@ -23,7 +23,16 @@ require('./initDB.js');
 
 app.get('/', (req, res) => {
     res.send('Hello partytorten :)');
-})
+});
+
+
+
+CategoryRoute = require('./routes/Category.route');
+app.use('/category', CategoryRoute);
+
+
+
+
 
 // 404 Error handling
 app.use((req, res, next) => {
