@@ -11,19 +11,21 @@ const OrderSchema = new Schema({
       ref: 'User',
       required: true,
     },
-    product: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-    },
+    products: [{
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Product',
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+      }],
     address: {
       type: String,
       required: true,
@@ -44,6 +46,8 @@ const OrderSchema = new Schema({
     trackingNumber: {
       type: String,
     },
+  }, {
+    timestamps: true,
   });
 
 
