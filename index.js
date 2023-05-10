@@ -18,7 +18,7 @@ app.use(cors());
 
 
 // Database Connection
-mongoose.connect('mongodb+srv://hedayat_farahi:database.mongo123@cluster0.zmydvyp.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.zmydvyp.mongodb.net/?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -30,33 +30,8 @@ app.get('/', (req, res) => {
 
 
 
-// CategoryRoute = require('./routes/Category.route.js');
-// app.use('/category', CategoryRoute);
-
-
-
-app.get("/category", async (req, res) => {
-    try {
-        const categories = await Category.find();
-        res.json(categories);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'An error occurred' });
-    }
-});
-
-app.post("/category", async (req, res) => {
-    try {
-        const { name } = req.body;
-        const category = new Category({ name });
-        await category.save();
-        res.json(category);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'An error occurred' });
-    }
-});
-
+CategoryRoute = require('./routes/Category.route.js');
+app.use('/category', CategoryRoute);
 
 
 app.listen(PORT, () => {
