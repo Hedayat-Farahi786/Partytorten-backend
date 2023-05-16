@@ -23,7 +23,18 @@ router.post("/", async (req, res) => {
     }
 });
 
-// router.get("/:id", getSingleCategory);
+router.get("/:id", async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        res.json(product);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'An error occurred' });
+    }
+});
 
 router.patch("/:id", async (req, res) => {
     try {
