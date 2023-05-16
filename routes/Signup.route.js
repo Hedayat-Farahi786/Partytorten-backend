@@ -7,7 +7,9 @@ const bcrypt = require('bcrypt');
 
 router.post("/", async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const name = req.body.name;
+        const email = req.body.email.toLowerCase();
+        const password = req.body.password;
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({ name, email, password: hashedPassword });
         const result = await user.save();
