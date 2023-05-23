@@ -29,7 +29,10 @@ router.get("/single/:orderId", async (req, res) => {
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    res.json(order);
+    const totalOrders = await Order.find();
+    const totalOrdersLength = totalOrders.length;
+    
+    res.json({ order, totalOrdersLength });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'An error occurred' });
