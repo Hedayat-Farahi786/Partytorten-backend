@@ -14,7 +14,11 @@ router.get("/:userId", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-      const order = new Order(req.body);
+      const data = req.body;  
+      const totalOrders = await Order.find();
+        
+      data.orderNumber = 1000 + totalOrders.length;  
+      const order = new Order(data);
       await order.save();
       res.json(order);
     } catch (error) {
@@ -29,10 +33,7 @@ router.get("/single/:orderId", async (req, res) => {
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    const totalOrders = await Order.find();
-    const totalOrdersLength = totalOrders.length;
-    
-    res.json({ order, totalOrdersLength });
+    res.json(order);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'An error occurred' });
