@@ -26,6 +26,10 @@ const OrderSchema = new Schema({
           required: true,
         },
       }],
+    orderNumber: {
+      type: String,
+      required: true,
+    },
     address: {
       type: String,
       required: true,
