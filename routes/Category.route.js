@@ -14,8 +14,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        const { name } = req.body;
-        const category = new Category({ name });
+        const category = new Category(req.body);
         await category.save();
         res.json(category);
     } catch (error) {
@@ -28,8 +27,7 @@ router.post("/", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
     try {
-        const { name } = req.body;
-        const category = await Category.findByIdAndUpdate(req.params.id, { name }, { new: true });
+        const category = await Category.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json(category);
     } catch (error) {
         console.error(error);
